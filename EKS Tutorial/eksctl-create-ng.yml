@@ -1,0 +1,23 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  #Creates a node group for already created Cluster with the name given here
+  name:  eksctl-test 
+  region: us-west-2
+  
+nodeGroups:
+  - name: ng1-public
+    instanceType: t3.micro
+    desiredCapacity: 2
+
+managedNodeGroups:
+  - name: ng2-managed
+    instanceType: t3.micro
+    minSize: 1
+    maxSize: 3
+    desiredCapacity: 2
+        
+
+# eksctl create nodegroup --config-file=<filename>
+# It will fail if cluster is not present or is in Creating state
