@@ -1,0 +1,17 @@
+# HPA - Horizontal Pod Autoscalar
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: php-apache
+  namespace: default
+spec:
+  scaleTargetRef:   # This references the specific deployment
+    apiVersion: apps/v1
+    kind: Deployment
+    name: php-apache
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50 # 50 % of request CPU i.e 250m
+
+# kubectl get hpa

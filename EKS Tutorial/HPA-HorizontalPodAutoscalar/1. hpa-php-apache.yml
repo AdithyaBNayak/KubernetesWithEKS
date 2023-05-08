@@ -1,0 +1,26 @@
+# First we do the deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-apache
+spec:
+  selector:
+    matchLabels:
+      run: php-apache
+  replicas: 1    # ReplicaSet
+  template: # Pod Definition
+    metadata:
+      labels:
+        run: php-apache
+    spec:
+      containers:
+      - name: php-apache
+        image: k8s.gcr.io/hpa-example
+        resources:
+          requests: 
+            cpu: 500m # 1vCPU = 1000m One pod requesting CPU of 500m
+          limits:
+            cpu: 1000m # One pod CPU limit of 1000m
+        ports:
+        - containerPort: 80
+
